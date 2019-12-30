@@ -39,6 +39,7 @@ class ServerManager:
         self.sizX = sizX
         self.sizY = sizY
         self.snakes = {}
+        #need to change
         self.filler = {0: [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]],
                        1: [[self.sizX - 1, 0], [self.sizX - 2, 0], [sizX - 3, 0], [sizX - 4, 0], [sizX - 5, 0]],
                        2: [[0, self.sizY - 5], [0, self.sizY - 4], [0, self.sizY - 3], [0, self.sizY - 2],
@@ -53,7 +54,7 @@ class ServerManager:
 
         initboard()
         fill_snakes()
-
+    #need explaine
     def new_block():
         block_list = []
         for i in range(0, 3):
@@ -73,7 +74,7 @@ class ServerManager:
             block_pos = [block_pos[0], block_pos[1] + 10]
             block_list.append(block_pos)
         return block_list
-
+    #not needed any more
     def initboard(self):
         self.board = [[0 for i in range(self.sizX)] for j in range(self.sizY)]
         for i in range(0, self.sizX):
@@ -90,12 +91,12 @@ class ServerManager:
         for i in range(self.numOfClients):
             self.snakes.append(self.filler.get(i))
 
-
+#need explaine
 def send_start_message(game1):
-    string = "start#"
+    massge = "start#"
     for x, y in game1.snakes.items():
-        string = string + str(x) + str(y) + "#"
-    return string + str(game1.sizX) + "#"+game1.blocks
+        massge = massge + str(x) + str(y) + "#"
+    return massge + str(game1.sizX) + "#"+game1.blocks
     str(game1.sizy)
 
 
@@ -104,7 +105,7 @@ def eaten(id):
     return True
 
 
-def send_message(game1):
+def send_update_message(game1):
     string = "update#"
     for i in range(len(game1.snakes)):
         string = string + str(i) + ","
@@ -113,20 +114,20 @@ def send_message(game1):
         string = string + str(game1.snake[i][0]) + "#"
     return string + str(game1.banana) + "#" + str(game1.crown)
 
-
-def ok(data):
+#for clinte
+def parss_ok_msg(data):
     my_id = data.split(",")[1]
 
-
-def start(data):
+#for clinte
+def parss_start_msg(data):
 
     for i in range(1, data.count("#") - 3):  # posiible bad math
          snake_body_everyone[i - 1] = data.split("#")[i]
     frame_size_x = data.split("#")[data.count("#") - 2]
     frame_size_y = data.split("#")[data.count("#") - 1]
 
-
-def update(data):
+#for clinte TO DO for server too
+def parss_update_msg(data):
     for i in range(1, data.count("#") - 4):  # posiible bad math
         snake_pos_everyone[i - 1] = data.split("#")[i]
     is_he_king = data.split("#")[data.count("#") - 2]
